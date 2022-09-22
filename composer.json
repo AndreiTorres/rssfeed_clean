@@ -1,0 +1,17 @@
+{
+    "name": "rss/plugins",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rss\\Plugins\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pastito seco"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
