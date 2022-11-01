@@ -2,9 +2,10 @@
     "name": "rss/plugins",
     "license": "MIT",
     "autoload": {
-        "psr-4": {
-            "Rss\\Plugins\\": "src/"
-        }
+        "classmap": [
+            "src/noticias/",
+            "src/manejadorurl/"
+        ]
     },
     "authors": [
         {
