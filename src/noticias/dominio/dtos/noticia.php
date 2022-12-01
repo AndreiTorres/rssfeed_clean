@@ -2,9 +2,9 @@
 
 class DTONoticia {
 
-    public $titulo;
-    public $enlace;
-    public $descripcion;
+    public string $titulo;
+    public string $enlace;
+    public string $descripcion;
     public $fechaPublicacion;
     public $categoria;
     public $imagen;

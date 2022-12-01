@@ -1,7 +1,10 @@
 <?php
 
-require_once("../../../noticias/dominio/interfaces/IObtenerNoticiasGateway.php");
-require_once("../../../noticias/dominio/dtos/noticia.php");
+// require_once("../../../noticias/dominio/interfaces/IObtenerNoticiasGateway.php");
+// require_once("../../../noticias/dominio/dtos/noticia.php");
+require_once("noticias/dominio/interfaces/IObtenerNoticiasGateway.php");
+require_once("noticias/dominio/dtos/noticia.php");
+
 
 class ObtenerNoticiasURL implements IObtenerNoticiasGateway {
     
@@ -25,7 +28,7 @@ class ObtenerNoticiasURL implements IObtenerNoticiasGateway {
                 $titulo = $item->title;
                 $enlace = $item->link;
                 $descripcion = $item->description;
-                $fechaPublicacion = $item->pubDate . "\n";
+                $fechaPublicacion = $item->pubDate;
                 $fechaPublicacion = date('D, d M Y',strtotime($fechaPublicacion));
                 $categoria = $item->category;
                 $descripcion = $item->description;
@@ -61,7 +64,6 @@ class ObtenerNoticiasURL implements IObtenerNoticiasGateway {
             }
         }
 
-        echo "Se devuelven: " . count($noticias) . " noticias\n";
         return $noticias;
     }
 

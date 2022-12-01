@@ -1,8 +1,10 @@
 <?php
 
-require_once("../gateways/ObtenerNoticiasDB.php");
-require_once("../gateways/ObtenerNoticiasURL.php");
-require_once("../../dominio/usecases/obtenerNoticias.php");
+// require_once("../gateways/ObtenerNoticiasDB.php");
+require_once('noticias/infraestructura/gateways/ObtenerNoticiasDB.php');
+// require_once("../gateways/ObtenerNoticiasURL.php");
+require_once("noticias/infraestructura/gateways/ObtenerNoticiasURL.php");
+require_once("noticias/dominio/usecases/obtenerNoticias.php");
 
 class ObtenerController {
 
@@ -21,13 +23,7 @@ class ObtenerController {
         }
 
         $obtenerNoticiasUseCase = new ObtenerNoticiasUseCase($gateway);
-        $obtenerNoticiasUseCase->obtenerNoticias($url);
+        return$obtenerNoticiasUseCase->obtenerNoticias($url);
     }
 }
-
-$rssvalido = "https://rss.nytimes.com/services/xml/rss/nyt/Arts.xml";
-$rssinvalido = "xD";
-
-$controller = new ObtenerController();
-$controller->obtenerNoticias($rssvalido, false);
 ?>
