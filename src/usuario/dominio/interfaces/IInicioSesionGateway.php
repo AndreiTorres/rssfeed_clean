@@ -1,8 +1,8 @@
 <?php
 
-interface ILoginGateway {
+interface IInicioSesionGateway {
 
-    public function login();
+    public function buscarPor($contrasena, $correo);
 }
 
 

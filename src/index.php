@@ -2,6 +2,7 @@
 
 require_once('./noticias/infraestructura/controladores/obtenerController.php');
 require_once('./usuario/infraestructura/controladores/RegistrarController.php');
+require_once('./usuario/infraestructura/controladores/LoginController.php');
 
 $routesArray = explode("/", $_SERVER['REQUEST_URI']);
 $routesArray = array_filter($routesArray);
@@ -71,6 +72,34 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
                 $json = array(
                     'status' => 200,
                     'message' => 'El registro fue exitoso',
+                    'data' => $usuario
+                );
+                echo json_encode($json, http_response_code($json["status"]));
+            }
+            return;
+
+        }
+
+        if ($routesArray[1] == "login") {
+
+            $contrasena = $_POST['contrasena'];
+            $correo = $_POST['correo'];
+
+            $loginController = new LoginController();
+            $usuario = $loginController->iniciarSesion($contrasena, $correo);
+            
+            
+            if (is_null($usuario)) {
+                $json = array(
+                    'status' => 400,
+                    'message' => 'El usuario no se encuentra registrado',
+                    'data' => $usuario
+                );
+                echo json_encode($json, http_response_code($json["status"]));
+            } else {
+                $json = array(
+                    'status' => 200,
+                    'message' => 'El inicio de sesion fue exitoso',
                     'data' => $usuario
                 );
                 echo json_encode($json, http_response_code($json["status"]));
