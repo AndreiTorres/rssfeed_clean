@@ -2,7 +2,7 @@
 
 interface IInicioSesionGateway {
 
-    public function buscarPor($contrasena, $correo);
+    public function buscarPor($correo);
 }
 
 

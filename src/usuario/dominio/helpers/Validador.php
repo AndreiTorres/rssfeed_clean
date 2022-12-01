@@ -24,6 +24,13 @@ class Validador {
         $pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
         return preg_match($pattern, $correo);
     }
+
+    static function validarContrasenaHash($contrasena, $contrasena_usuario) {
+			$contrasena_hash = crypt($contrasena, "RSSFEEDCLEAN");
+
+            return $contrasena_hash === $contrasena_usuario;
+
+    }
 }
 
 

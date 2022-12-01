@@ -7,7 +7,6 @@ require_once('./usuario/infraestructura/controladores/LoginController.php');
 $routesArray = explode("/", $_SERVER['REQUEST_URI']);
 $routesArray = array_filter($routesArray);
 
-// Cuando no se hace ninguna petición a la API
 if (empty($routesArray)) {
     $json = array(
         'status' => 404,
@@ -71,6 +70,8 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
                 echo json_encode($json, http_response_code($json["status"]));
             } else {
                 unset($usuario->contrasena);
+                unset($usuario->token);
+                unset($usuario->token_exp);
 
                 $json = array(
                     'status' => 200,
@@ -100,6 +101,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
                 );
                 echo json_encode($json, http_response_code($json["status"]));
             } else {
+                unset($usuario->contrasena);
                 $json = array(
                     'status' => 200,
                     'message' => 'Inicio exitoso',

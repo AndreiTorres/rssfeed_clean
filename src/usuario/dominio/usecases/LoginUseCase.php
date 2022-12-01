@@ -9,27 +9,31 @@ class IniciarSesionUseCase {
     }
     
     public function iniciarSesion($contrasena, $correo) {
-        // Validar los campos
-        // contraseña que tenga 10 caracteres
-        // correo coincida con un patrón
-        // deberia usar un gateway de la bd
-        // Se validan los datos del usuario
+        
         if (!Validador::validarNombre($contrasena)
             || !Validador::validarCorreo($correo)) {
             return null; 
         }
         
-        $this->iniciarSesionGateway->buscarPor($contrasena, $correo);
+        $usuarioEncontrado = $this->iniciarSesionGateway->buscarPor($correo);
         
-        //Se reciben datos del Gateway
-        $usuario = new DTOUsuario(
-            "Jhon Doe",
-            $contrasena,
-            $correo
-        );
-        // Si el usuario se registro se devuelve al usuario
-        // Si el usuario no se registro se devuelve null
-        return $usuario;
+        if (is_null($usuarioEncontrado)) {
+            return null;
+        }
+
+        $result = Validador::validarContrasenaHash($contrasena, $usuarioEncontrado["contrasena_usuario"]);
+        
+        if ($result == 1) {
+            return new DTOUsuario(
+                $usuarioEncontrado["nombre_usuario"],
+                $contrasena,
+                $usuarioEncontrado["correo_usuario"],
+                $usuarioEncontrado["token"],
+                $usuarioEncontrado["token_exp"]
+            );
+        }
+
+        return null;
     }
 }
 

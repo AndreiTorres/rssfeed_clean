@@ -24,7 +24,9 @@ class RegistrarseUseCase {
         $usuario = new DTOUsuario(
             $nombre,
             $contrasena,
-            $correo
+            $correo,
+            null,
+            null
         );
 
         $result = $this->registrarGateway->registrar($usuario);
