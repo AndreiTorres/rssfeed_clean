@@ -4,7 +4,7 @@
     "autoload": {
         "classmap": [
             "src/noticias/",
-            "src/manejadorurl/"
+            "src/suscriptor/"
         ]
     },
     "authors": [

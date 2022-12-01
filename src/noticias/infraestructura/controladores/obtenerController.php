@@ -1,8 +1,8 @@
 <?php
 
-require("../gateways/ObtenerNoticiasDB.php");
-require("../gateways/ObtenerNoticiasURL.php");
-require("../../dominio/usecases/obtenerNoticias.php");
+require_once("../gateways/ObtenerNoticiasDB.php");
+require_once("../gateways/ObtenerNoticiasURL.php");
+require_once("../../dominio/usecases/obtenerNoticias.php");
 
 class ObtenerController {
 
@@ -26,7 +26,7 @@ class ObtenerController {
 }
 
 $rssvalido = "https://rss.nytimes.com/services/xml/rss/nyt/Arts.xml";
-$rssinvalido = "xD jajaja Andrei es puto";
+$rssinvalido = "xD";
 
 $controller = new ObtenerController();
 $controller->obtenerNoticias($rssvalido, false);

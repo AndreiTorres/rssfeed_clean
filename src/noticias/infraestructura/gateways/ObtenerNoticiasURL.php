@@ -1,9 +1,7 @@
 <?php
 
-require_once("D:/Clean/rssfeed_clean/src/noticias/dominio/interfaces/IObtenerNoticiasGateway.php");
-//require("../../dominio/interfaces/IObtenerNoticiasGateway.php");
-require("D:/Clean/rssfeed_clean/src/noticias/dominio/dtos/noticia.php");
-//require("../../dominio/dtos/noticia.php");
+require_once("../../../noticias/dominio/interfaces/IObtenerNoticiasGateway.php");
+require_once("../../../noticias/dominio/dtos/noticia.php");
 
 class ObtenerNoticiasURL implements IObtenerNoticiasGateway {
     

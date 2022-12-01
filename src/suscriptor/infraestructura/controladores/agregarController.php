@@ -1,10 +1,9 @@
 <?php
 
-require("../gateways/Operations.php");
-require("../../dominio/usecases/agregarUrl.php");
-require("../../../noticias/dominio/usecases/obtenerNoticias.php");
-require("../../../noticias/infraestructura/gateways/ObtenerNoticiasURL.php");
-//require("D:/Clean/rssfeed_clean/src/noticias/infraestructura/gateways/ObtenerNoticiasURL.php");
+require_once("../gateways/Operations.php");
+require_once("../../dominio/usecases/agregarUrl.php");
+require_once("../../../noticias/dominio/usecases/obtenerNoticias.php");
+require_once("../../../noticias/infraestructura/gateways/ObtenerNoticiasURL.php");
 
 class AgregarController {
 
