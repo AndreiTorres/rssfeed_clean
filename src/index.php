@@ -62,16 +62,19 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             
             
             if (is_null($usuario)) {
+
                 $json = array(
                     'status' => 400,
-                    'message' => 'El registro no fue exitoso',
+                    'message' => 'Registro fallido',
                     'data' => $usuario
                 );
                 echo json_encode($json, http_response_code($json["status"]));
             } else {
+                unset($usuario->contrasena);
+
                 $json = array(
                     'status' => 200,
-                    'message' => 'El registro fue exitoso',
+                    'message' => 'Registro exitoso',
                     'data' => $usuario
                 );
                 echo json_encode($json, http_response_code($json["status"]));
@@ -99,7 +102,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             } else {
                 $json = array(
                     'status' => 200,
-                    'message' => 'El inicio de sesion fue exitoso',
+                    'message' => 'Inicio exitoso',
                     'data' => $usuario
                 );
                 echo json_encode($json, http_response_code($json["status"]));
@@ -124,7 +127,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 }
 
 if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
-    // Peticiones GET
+    
     if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
         $json = array(
             'status' => 200,

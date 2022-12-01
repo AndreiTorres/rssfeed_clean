@@ -14,7 +14,6 @@ class RegistrarseUseCase {
 
     public function crearNuevoUsuario($nombre, $contrasena, $correo) {
         
-        // Se validan los datos del usuario
         if (!Validador::validarNombre($nombre) 
             || !Validador::validarNombre($contrasena)
             || !Validador::validarCorreo($correo)) {
@@ -28,10 +27,12 @@ class RegistrarseUseCase {
             $correo
         );
 
-        $this->registrarGateway->registrar($usuario);
+        $result = $this->registrarGateway->registrar($usuario);
 
-        // Si el usuario se registro se devuelve al usuario
-        // Si el usuario no se registro se devuelve null
+        if ($result == 0) {
+            return null;
+        }
+
         return $usuario;
     }
 
