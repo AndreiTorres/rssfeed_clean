@@ -12,7 +12,7 @@ class AgregarController {
         $obtenerNoticiasURLGateway = new ObtenerNoticiasURL();
 
         $obtenerNoticiasUseCase = new ObtenerNoticiasUseCase($obtenerNoticiasURLGateway);
-        $noticias = $obtenerNoticiasUseCase->obtenerNoticias($url);
+        $noticias = $obtenerNoticiasUseCase->obtenerNoticias($url, null);
 
         $tokenGateway = new TokenGateway();
         $agregarUseCase = new AgregarURLUseCase($operation, $tokenGateway);

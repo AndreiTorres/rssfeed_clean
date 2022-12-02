@@ -1,5 +1,4 @@
 <?php
-use PhpParser\Node\Expr\AssignOp\Concat;
 
 require_once('../vendor/autoload.php');
 use Firebase\JWT\JWT;

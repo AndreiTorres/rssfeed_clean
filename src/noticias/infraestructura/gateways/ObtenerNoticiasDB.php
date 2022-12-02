@@ -20,7 +20,6 @@ class ObtenerNoticiasDB implements IObtenerNoticiasGateway {
         } catch (Exception $e) {
             return null;
         }
-        echo "Obteniendo noticias de la db...";
     }
 }
 
