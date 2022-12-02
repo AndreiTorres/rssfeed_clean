@@ -1,6 +1,6 @@
 <?php
 
 interface IObtenerNoticiasGateway {
-    public function obtenerNoticias($url);
+    public function obtenerNoticias($url, $id_usuario);
 }
 ?>

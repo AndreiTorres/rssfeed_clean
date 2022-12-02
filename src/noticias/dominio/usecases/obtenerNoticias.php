@@ -8,8 +8,8 @@ class ObtenerNoticiasUseCase{
         $this->obtenerNoticiasGateway = $gateway;
     }
 
-    public function obtenerNoticias($url){
-        return $this->obtenerNoticiasGateway->obtenerNoticias($url);
+    public function obtenerNoticias($url, $id_usuario){
+        return $this->obtenerNoticiasGateway->obtenerNoticias($url, $id_usuario);
     }
 }
 

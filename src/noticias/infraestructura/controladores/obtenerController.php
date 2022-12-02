@@ -6,7 +6,7 @@ require_once("noticias/dominio/usecases/obtenerNoticias.php");
 
 class ObtenerController {
 
-    public function obtenerNoticias($url, $flag) {
+    public function obtenerNoticias($url, $flag, $id_usuario) {
 
         $gateway = "";
 
@@ -17,7 +17,7 @@ class ObtenerController {
         }
 
         $obtenerNoticiasUseCase = new ObtenerNoticiasUseCase($gateway);
-        return$obtenerNoticiasUseCase->obtenerNoticias($url);
+        return$obtenerNoticiasUseCase->obtenerNoticias($url, $id_usuario);
     }
 }
 ?>

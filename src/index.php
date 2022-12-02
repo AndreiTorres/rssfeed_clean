@@ -20,11 +20,21 @@ if (empty($routesArray)) {
 if (count($routesArray) > 1 && isset($_SERVER['REQUEST_METHOD'])) {
     $routesArray[1] = explode("?", $routesArray[1]);
     if ($_SERVER["REQUEST_METHOD"] == "GET" && $routesArray[1][0] === "news") {
-
+        
         $rssurl = $_GET['url'];
 
         $controller = new ObtenerController();
-        $noticias = $controller->obtenerNoticias($rssurl, false);
+        $noticias;
+        $headers = getallheaders();
+        $flag = false;
+        if(isset($headers["id_usuario"])){
+            $id_usuario = $headers["id_usuario"];
+            $flag = true;
+            $noticias = $controller->obtenerNoticias($rssurl, $flag, $id_usuario);
+        }else{
+            $noticias = $controller->obtenerNoticias($rssurl, $flag, null);
+            
+        }
 
         if (is_null($noticias)) {
             $json = array(

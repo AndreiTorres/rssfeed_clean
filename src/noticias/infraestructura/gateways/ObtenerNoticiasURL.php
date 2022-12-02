@@ -6,7 +6,7 @@ require_once("noticias/dominio/dtos/noticia.php");
 
 class ObtenerNoticiasURL implements IObtenerNoticiasGateway {
     
-    public function obtenerNoticias($url) {
+    public function obtenerNoticias($url, $id_usuario) {
         $feeds = $this->leerURL($url);
         
         if(is_null($feeds)){
