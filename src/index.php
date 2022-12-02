@@ -165,40 +165,8 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             return;
         }
     }
-    $routesArray[1] = explode("?", $routesArray[1]);
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && $routesArray[1][0] == "filtrar") {
-        $categoria = $_GET['categoria'];
-        $headers = getallheaders();
-        $id_usuario = $headers["id_usuario"];
-
-        $controller = new FiltrarController();
-        $noticias = $controller->filtrar($categoria, $id_usuario);
-
-        if (is_null($noticias)) {
-            $json = array(
-                'status' => 400,
-                'message' => "error"
-            );
-
-            echo json_encode($json, http_response_code($json["status"]));
-
-        } else {
-            $json = array(
-                'status' => 200,
-                'message' => "successful",
-                "data" => $noticias
-            );
-
-            echo json_encode($json, http_response_code($json["status"]));
-        }
-        return;
-    }
-}
-
-if (isset($_SERVER['REQUEST_METHOD'])) {
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && $routesArray[1] == "eliminarurl") {
-
+ 
+    if ($routesArray[1] == "eliminarurl") {
         $url = $_POST['url'];
         $headers = getallheaders();
         $token = $headers["Auth"];
@@ -235,6 +203,35 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 echo json_encode($json, http_response_code($json["status"]));
             }
 
+        }
+        return;
+    }
+
+    $routesArray[1] = explode("?", $routesArray[1]);
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && $routesArray[1][0] == "filtrar") {
+        $categoria = $_GET['categoria'];
+        $headers = getallheaders();
+        $id_usuario = $headers["id_usuario"];
+
+        $controller = new FiltrarController();
+        $noticias = $controller->filtrar($categoria, $id_usuario);
+
+        if (is_null($noticias)) {
+            $json = array(
+                'status' => 400,
+                'message' => "error"
+            );
+
+            echo json_encode($json, http_response_code($json["status"]));
+
+        } else {
+            $json = array(
+                'status' => 200,
+                'message' => "successful",
+                "data" => $noticias
+            );
+
+            echo json_encode($json, http_response_code($json["status"]));
         }
         return;
     }
