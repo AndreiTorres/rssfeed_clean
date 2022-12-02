@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'e1d1c73d480ce07df9916f8d024571692e7e0b51',
+        'reference' => '2291cf8e5cea00781113818e0acd3ab3bfae74bc',
         'name' => 'rss/plugins',
         'dev' => true,
     ),
@@ -18,6 +18,15 @@
             'aliases' => array(),
             'reference' => '10dcfce151b967d20fde1b34ae6640712c3891bc',
             'dev_requirement' => true,
+        ),
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.3.1',
+            'version' => '6.3.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'reference' => 'ddfaddcb520488b42bca3a75e17e9dd53c3667da',
+            'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(
             'pretty_version' => '1.11.0',
@@ -110,12 +119,12 @@
             'dev_requirement' => true,
         ),
         'rss/plugins' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'e1d1c73d480ce07df9916f8d024571692e7e0b51',
+            'reference' => '2291cf8e5cea00781113818e0acd3ab3bfae74bc',
             'dev_requirement' => false,
         ),
         'sebastian/cli-parser' => array(

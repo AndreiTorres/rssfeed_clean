@@ -22,6 +22,7 @@ class RegistrarseUseCase {
         }
         
         $usuario = new DTOUsuario(
+            null,
             $nombre,
             $contrasena,
             $correo,

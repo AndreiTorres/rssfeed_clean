@@ -18,6 +18,7 @@ if (empty($routesArray)) {
 }
 
 if (count($routesArray) > 1 && isset($_SERVER['REQUEST_METHOD'])) {
+  
     $routesArray[1] = explode("?", $routesArray[1]);
     if ($_SERVER["REQUEST_METHOD"] == "GET" && $routesArray[1][0] === "news") {
 
@@ -31,7 +32,7 @@ if (count($routesArray) > 1 && isset($_SERVER['REQUEST_METHOD'])) {
                 'status' => 400,
                 'message' => "error"
             );
-            
+
             echo json_encode($json, http_response_code($json["status"]));
 
         } else {
@@ -40,7 +41,7 @@ if (count($routesArray) > 1 && isset($_SERVER['REQUEST_METHOD'])) {
                 'message' => "successful",
                 "data" => $noticias
             );
-            
+
             echo json_encode($json, http_response_code($json["status"]));
         }
         return;
@@ -58,8 +59,8 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $registrarController = new RegistrarController();
             $usuario = $registrarController->registrar($nombre, $contrasena, $correo);
-            
-            
+
+
             if (is_null($usuario)) {
 
                 $json = array(
@@ -91,8 +92,8 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $loginController = new LoginController();
             $usuario = $loginController->iniciarSesion($contrasena, $correo);
-            
-            
+
+
             if (is_null($usuario)) {
                 $json = array(
                     'status' => 400,
@@ -112,31 +113,92 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             return;
 
         }
+
+
+        if ($routesArray[1] == "agregarurl") {
+            $url = $_POST['url'];
+            $headers = getallheaders();
+            $token = $headers["Auth"];
+            $correo = $headers["correo_usuario"];
+            $agregarController = new AgregarController();
+            $respuesta = $agregarController->agregar($url, $token, $correo);
+
+            if (is_null($respuesta)) {
+                $json = array(
+                    'status' => 404,
+                    'message' => 'No autorizado'
+                );
+                echo json_encode($json, http_response_code($json["status"]));
+            } else {
+
+                if ($respuesta == "Expirado") {
+                    $json = array(
+                        'status' => 303,
+                        'message' => 'El token ha expirado'
+                    );
+                    echo json_encode($json, http_response_code($json["status"]));
+                } else if ($respuesta == "Error al agregar URL") {
+                    $json = array(
+                        'status' => 403,
+                        'message' => 'Error URL Invalido'
+                    );
+                    echo json_encode($json, http_response_code($json["status"]));
+                } else {
+                    $json = array(
+                        'status' => 200,
+                        'message' => 'Registro exitoso',
+                        'data' => $respuesta
+                    );
+                    echo json_encode($json, http_response_code($json["status"]));
+                }
+
+            }
+            return;
+        }
     }
 }
 
-if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
+if (isset($_SERVER['REQUEST_METHOD'])) {
     
-    if ($_SERVER["REQUEST_METHOD"] == "PUT") {
-        $json = array(
-            'status' => 200,
-            'resultado' => 'Solicitud PUT'
-        );
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && $routesArray[1] == "eliminarurl") {
 
-        echo json_encode($json, http_response_code($json["status"]));
-        return;
-    }
-}
+        $url = $_POST['url'];
+        $headers = getallheaders();
+        $token = $headers["Auth"];
+        $correo = $headers["correo_usuario"];
+        $eliminarController = new EliminarController();
+        $respuesta = $eliminarController->eliminar($url, $token, $correo);
 
-if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
-    
-    if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-        $json = array(
-            'status' => 200,
-            'resultado' => 'Solicitud DELETE'
-        );
+        if (is_null($respuesta)) {
+            $json = array(
+                'status' => 404,
+                'message' => 'No autorizado'
+            );
+            echo json_encode($json, http_response_code($json["status"]));
+        } else {
 
-        echo json_encode($json, http_response_code($json["status"]));
+            if ($respuesta == "Expirado") {
+                $json = array(
+                    'status' => 303,
+                    'message' => 'El token ha expirado'
+                );
+                echo json_encode($json, http_response_code($json["status"]));
+            } else if ($respuesta == "Error al eliminar URL") {
+                $json = array(
+                    'status' => 403,
+                    'message' => 'Error URL Invalido'
+                );
+                echo json_encode($json, http_response_code($json["status"]));
+            } else {
+                $json = array(
+                    'status' => 200,
+                    'message' => 'Registro eliminado con exito',
+                    'data' => $respuesta
+                );
+                echo json_encode($json, http_response_code($json["status"]));
+            }
+
+        }
         return;
     }
 }

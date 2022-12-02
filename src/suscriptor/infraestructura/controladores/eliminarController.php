@@ -1,17 +1,16 @@
 <?php
 
-require("../gateways/Operations.php");
-require("../../dominio/usecases/eliminarUrl.php");
+require("suscriptor/infraestructura/gateways/Operations.php");
+require("suscriptor/dominio/usecases/eliminarUrl.php");
 
 class EliminarController {
 
-    public function eliminar($url) {
+    public function eliminar($url, $token, $correo) {
         $operation = new Operations();
-        $eliminarUseCase = new EliminarURLUseCase($operation);
-        $eliminarUseCase->eliminarURL($url);
+        $tokenGateway = new TokenGateway();
+        $eliminarUseCase = new EliminarURLUseCase($operation, $tokenGateway);
+        return $eliminarUseCase->eliminarURL($url, $token, $correo);
     }
 }
 
-$controller = new EliminarController();
-$controller->eliminar("X");
 ?>

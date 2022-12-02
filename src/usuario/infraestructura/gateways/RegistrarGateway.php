@@ -12,7 +12,11 @@ class RegistrarGateway implements IRegistrarGateway {
 		$contrasena = crypt($usuario->contrasena, "RSSFEEDCLEAN");
 		$consulta = "INSERT INTO usuarios (nombre_usuario, contrasena_usuario, correo_usuario) VALUES ('".$usuario->nombre."','". $contrasena."', '". $usuario->correo."')";
 
-		$result = mysqli_query($conn, $consulta);
+		try {
+			$result = mysqli_query($conn, $consulta);
+		} catch(Exception $e) {
+			return 0;
+		}
 
 		Connection::close($conn);
 		return $result;

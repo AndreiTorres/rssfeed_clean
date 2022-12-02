@@ -3,6 +3,7 @@
 class DTOUsuario
 {
 
+    public $id;
     public string $nombre;
     public string $contrasena;
     public string $correo;
@@ -12,8 +13,9 @@ class DTOUsuario
     public $token_exp;
 
 
-    public function __construct($nombre, $contrasena, $correo, $token, $token_exp)
+    public function __construct($id, $nombre, $contrasena, $correo, $token, $token_exp)
     {
+        $this->id = $id;
         $this->nombre = $nombre;
         $this->contrasena = $contrasena;
         $this->correo = $correo;
