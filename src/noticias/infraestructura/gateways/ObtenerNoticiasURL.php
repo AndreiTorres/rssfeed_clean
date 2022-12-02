@@ -1,7 +1,5 @@
 <?php
 
-// require_once("../../../noticias/dominio/interfaces/IObtenerNoticiasGateway.php");
-// require_once("../../../noticias/dominio/dtos/noticia.php");
 require_once("noticias/dominio/interfaces/IObtenerNoticiasGateway.php");
 require_once("noticias/dominio/dtos/noticia.php");
 

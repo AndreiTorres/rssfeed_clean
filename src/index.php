@@ -3,6 +3,7 @@
 require_once('./noticias/infraestructura/controladores/obtenerController.php');
 require_once('./usuario/infraestructura/controladores/RegistrarController.php');
 require_once('./usuario/infraestructura/controladores/LoginController.php');
+require_once('./filtro/infraestructura/controladores/FiltrarController.php');
 
 $routesArray = explode("/", $_SERVER['REQUEST_URI']);
 $routesArray = array_filter($routesArray);
@@ -16,9 +17,7 @@ if (empty($routesArray)) {
     echo json_encode($json, http_response_code($json["status"]));
     return;
 }
-
 if (count($routesArray) > 1 && isset($_SERVER['REQUEST_METHOD'])) {
-  
     $routesArray[1] = explode("?", $routesArray[1]);
     if ($_SERVER["REQUEST_METHOD"] == "GET" && $routesArray[1][0] === "news") {
 
@@ -73,7 +72,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
                 unset($usuario->contrasena);
                 unset($usuario->token);
                 unset($usuario->token_exp);
-
+                unset($usuario->id);
                 $json = array(
                     'status' => 200,
                     'message' => 'Registro exitoso',
@@ -155,6 +154,34 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             }
             return;
         }
+    }
+    $routesArray[1] = explode("?", $routesArray[1]);
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && $routesArray[1][0] == "filtrar") {
+        $categoria = $_GET['categoria'];
+        $headers = getallheaders();
+        $id_usuario = $headers["id_usuario"];
+
+        $controller = new FiltrarController();
+        $noticias = $controller->filtrar($categoria, $id_usuario);
+
+        if (is_null($noticias)) {
+            $json = array(
+                'status' => 400,
+                'message' => "error"
+            );
+
+            echo json_encode($json, http_response_code($json["status"]));
+
+        } else {
+            $json = array(
+                'status' => 200,
+                'message' => "successful",
+                "data" => $noticias
+            );
+
+            echo json_encode($json, http_response_code($json["status"]));
+        }
+        return;
     }
 }
 

@@ -7,7 +7,7 @@ class Connection {
   static function connect() {
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "";
     $dbname = "rssfeedclean";
     
     $conn = new mysqli($servername, $username, $password, $dbname);
